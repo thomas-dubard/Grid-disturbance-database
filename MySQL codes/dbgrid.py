@@ -1,5 +1,6 @@
 import pymysql
 import time
+import hashlib
 
 
 class DbGrid:
@@ -69,7 +70,7 @@ class DbGrid:
             temporary TEXT NOT NULL,
             itmt TEXT NOT NULL,
             cause TEXT NOT NULL,
-            repair TEXT);''')
+            repair TIME);''')
             print("Table FAULT created successfully.")
         except pymysql.err.InternalError as e:
             print(f"Error : {e}")
@@ -80,10 +81,10 @@ class DbGrid:
             fault  INT  NOT NULL,
             type TEXT NOT NULL,
             ens TEXT NOT NULL,
-            interrup TEXT NOT NULL,
+            interrup TIME NOT NULL,
             discon TEXT NOT NULL,
             reclos TEXT NOT NULL,
-            duration TEXT NOT NULL);''')
+            duration TIME NOT NULL);''')
             print("Table OUTAGE created successfully.")
         except pymysql.err.InternalError as e:
             print(f"Error : {e}")
@@ -92,7 +93,7 @@ class DbGrid:
             c.execute('''CREATE TABLE Interruption
             (delivery TEXT NOT NULL,
             ref  CHAR(16)  NOT NULL,
-            duration TEXT NOT NULL);''')
+            duration TIME NOT NULL);''')
             print("Table INTERRUPTION created successfully.")
         except pymysql.err.InternalError as e:
             print(f"Error : {e}")
@@ -204,7 +205,7 @@ class DbGrid:
         '''
         # Verification
         fault_nr = self.get_info('fault')
-        if outage[1] not in range(fault_nr):
+        if outage[1] not in range(fault_nr+1):
             print(f"{outage[1]} is not a valid fault serial number.")
             return
         # Conection
@@ -215,7 +216,8 @@ class DbGrid:
         c = conn.cursor()
         try:
             c.execute(f"INSERT INTO outage(unit, fault, type, ens, \
-                interrup, discon, reclos, duration) VALUES {tuple(outage)}")
+                interrup, discon, reclos, duration)\
+                VALUES {tuple(outage)}")
             print(f"Outage {outage[:2]} added successfully.")
         except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
             print(f"Error : {e}")
@@ -224,38 +226,41 @@ class DbGrid:
         c.close()
         conn.close()
 
-
-piche = DbGrid('Piche', '127.0.0.1', 'thomas', 'Dubard.113')
-# piche.init_all()  # OK
-# piche.del_all()  # OK
-
-# dtbt = [time.strftime("%Y-%m-%d", time.localtime()),
-#         time.strftime("%H:%M:%S", time.localtime())]
-# piche.insert_disturbance(dtbt)  # OK
-
-'''  # OK
-ft = [('Line', '400 kV', 'Own', 'Component', 'Direct earthed',
-       'Single-phase earth fault', 'Primary', 'Temporary',
-       'Non-intermittent', 'Lightning', '0 min'),
-      ('Circuit breakers', '400 kV', 'Own', 'Component',
-       'Direct earthed', 'Function failing to occur',
-       'Secondary/latent fault', 'Permanent',
-       'Non-intermittent', 'Technical equipment', '48 h 0 min')
-      ]
-
-for fault in ft:
-    piche.insert_fault('2020-2', fault)
-'''
-
-ot = [('Line X-Y', 1, 'Line', '0 MWh', '0 min', 'Automatically',
-       'Manually after repair', '48 h 0 min'),
-      ('Line Y-Z', 2, 'Line', '0 MWh', '0 min', 'Automatically',
-       'Manually after inspection', '0 h 45 min'),
-      ('Busbar Y', 2, 'Busbar', '0 MWh', '0 min', 'Automatically',
-       'Manually after inspection', '0 h 45 min'),
-      ('Power transformer Y', 2, 'Power transformer', '7 MWh', '0 min',
-       'Automatically', 'Manually after inspection', '0 h 45 min')
-      ]
-
-for outage in ot:
-    piche.insert_outage(outage)
+    def insert_interruption(self, disturb, itrpt):
+        '''
+        Insert an outage into the database.
+        'disturb' is the index of the disturbance associated.
+        'itrpt' is a list : [unit, fault, type, ens,
+                              interrup, discon, reclos, duration]
+        Disturbance index in the list should be already added to the database.
+        '''
+        # Conection
+        conn = self.connect()
+        if type(conn) == 'bool':
+            return
+        c = conn.cursor()
+        # Verification
+        try:
+            sql_command = f"SELECT * FROM disturbance WHERE id = '{disturb}'"
+            c.execute(sql_command)
+            # for dist in c.fetchall():
+            if len(c.fetchall()) > 0:
+                pass
+            else:
+                print(f"No such disturbance {disturb} found.")
+                return
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e}")
+            return
+        # Insertion
+        try:
+            sql_command = (interrupt[0], disturb, interrupt[1])
+            c.execute(f"INSERT INTO interruption(delivery, \
+                      ref, duration) VALUES {sql_command}")
+            print(f"Interruption {itrpt} added successfully.")
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e}")
+        # Update
+        conn.commit()
+        c.close()
+        conn.close()

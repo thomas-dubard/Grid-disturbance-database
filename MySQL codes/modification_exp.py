@@ -1,36 +1,45 @@
-from robo_head import *
+from dbgrid import *
 
-db_name = "PICHE"
-db_init(db_name)
+piche = DbGrid('Piche', '127.0.0.1', 'thomas', 'Dubard.113')
 
-dtbt = ('2020-1', '2020-04-09', '14:46:31')
+# piche.init_all()  # OK
+# piche.del_all()  # OK
 
-ft = [(1, 'Line', '400 kV', 'Own', 'Component', 'Direct earthed',
+'''  # test code for insert_disturbance / OK
+dtbt = [time.strftime("%Y-%m-%d", time.localtime()),
+        time.strftime("%H:%M:%S", time.localtime())]
+piche.insert_disturbance(dtbt)
+'''
+
+'''  # test code for insert_fault / OK
+ft = [('Line', '400 kV', 'Own', 'Component', 'Direct earthed',
        'Single-phase earth fault', 'Primary', 'Temporary',
-       'Non-intermittent', 'Lightning', '0 min'),
-      (2, 'Circuit breakers', '400 kV', 'Own', 'Component',
+       'Non-intermittent', 'Lightning', '00:00:00'),
+      ('Circuit breakers', '400 kV', 'Own', 'Component',
        'Direct earthed', 'Function failing to occur',
        'Secondary/latent fault', 'Permanent',
-       'Non-intermittent', 'Technical equipment', '48 h 0 min')
+       'Non-intermittent', 'Technical equipment', '48:00:00')
       ]
-ot = [('Line X-Y', 1, 'Line', '0 MWh', '0 min', 'Automatically',
-       'Manually after repair', '48 h 0 min'),
-      ('Line Y-Z', 2, 'Line', '0 MWh', '0 min', 'Automatically',
-       'Manually after inspection', '0 h 45 min'),
-      ('Busbar Y', 2, 'Busbar', '0 MWh', '0 min', 'Automatically',
-       'Manually after inspection', '0 h 45 min'),
-      ('Power transformer Y', 2, 'Power transformer', '7 MWh', '0 min',
-       'Automatically', 'Manually after inspection', '0 h 45 min')
-      ]
-ip = [('Power transformer', '0 h 45 min')]
+for fault in ft:
+    piche.insert_fault('2020-2', fault)
+'''
 
-try:
-    db_insert_disturbance(db_name, dtbt)
-    for fault in ft:
-        db_insert_fault(db_name, dtbt[0], fault)
-    for outage in ot:
-        db_insert_outage(db_name, outage)
-    for interrupt in ip:
-        db_insert_interruption(db_name, dtbt[0], interrupt)
-except pymysql.err.IntegrityError as err:
-    print(f"Error : {err}")
+'''  # test code for insert_outage / OK
+ot = [('Line X-Y', 1, 'Line', '0 MWh', '00:00:00', 'Automatically',
+       'Manually after repair', '48:00:00'),
+      ('Line Y-Z', 2, 'Line', '0 MWh', '00:00:00', 'Automatically',
+       'Manually after inspection', '00:45:00'),
+      ('Busbar Y', 3, 'Busbar', '0 MWh', '00:00:00', 'Automatically',
+       'Manually after inspection', '00:45:00'),
+      ('Power transformer Y', 4, 'Power transformer', '7 MWh', '00:00:00',
+       'Automatically', 'Manually after inspection', '00:45:00')
+      ]
+for outage in ot:
+    piche.insert_outage(outage)
+'''
+
+'''  # test code for insert_interruption / OK
+ip = [('Power transformer', '00:15:00')]
+for interrupt in ip:
+    piche.insert_interruption('2020-2', interrupt)
+'''
