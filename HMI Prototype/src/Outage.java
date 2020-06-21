@@ -1,7 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-
+/**
+ * Class conceived to create a window for Outage inputs
+ *
+ */
 public class Outage extends Frame implements ActionListener {
 
 	private Button save;
@@ -22,7 +25,10 @@ public class Outage extends Frame implements ActionListener {
 	private Choice reclosing;
 	private Label outageLabel;
 	private TextField outage;
-	
+
+	/**
+	 * Creates a new instance of Outage, displaying a window to save a new outage
+	 */
 	public Outage () {
 		sysuLabel = new Label("System unit");
 		sysu = new TextField(40);
@@ -92,6 +98,10 @@ public class Outage extends Frame implements ActionListener {
 		save.addActionListener(this);
 		addWindowListener(new EcouteurPourFermetureFenetre());
 	}
+	/**
+	 * When the "Save" Button is clicked, all the data inserted is converted to String,
+	 * the different components being separated by the "%" symbol. This String is written in ToSave.txt file. 
+	 */
 	public void actionPerformed (ActionEvent e) {
 		if (e.getSource()==save) {
 			try {

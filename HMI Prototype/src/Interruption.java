@@ -2,6 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
+/**
+ * Class conceived to create a window for Interruption inputs
+ *
+ */
 public class Interruption extends Frame implements ActionListener {
 	
 	private Button save;
@@ -13,6 +17,9 @@ public class Interruption extends Frame implements ActionListener {
 	private Label disturbanceLabel;
 	private TextField disturbance;
 	
+	/**
+	 * Creates a new instance of Interruption, displaying a window to save a new interruption.
+	 */
 	public Interruption () {
 		delPointLabel= new Label ("Name of delivery point");
 		delPoint = new TextField(40);
@@ -38,6 +45,10 @@ public class Interruption extends Frame implements ActionListener {
 		save.addActionListener(this);
 		addWindowListener(new EcouteurPourFermetureFenetre()); 
 	}
+	/**
+	 * When the "Save" Button is clicked, all the data inserted is converted to String,
+	 * the different components being separated by the "%" symbol. This String is written in ToSave.txt file. 
+	 */
 	public void actionPerformed (ActionEvent e) {
 		if (e.getSource()==save) {
 			try {
