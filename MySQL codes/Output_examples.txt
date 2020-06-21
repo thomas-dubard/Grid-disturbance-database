@@ -1,0 +1,16 @@
+INPUT : 
+'''  # test code for select_disturbance
+res = piche.select_disturbance('2020-1')
+print(res['disturbance'])
+print(res['fault'])
+print(res['outage'])
+print(res['interruption'])
+'''
+
+OUTPUT :
+[('2020-1', datetime.date(2020, 6, 21), datetime.timedelta(seconds=58827))]
+[(1, '2020-1', 'Line', '400 kV', 'Own', 'Component', 'Direct earthed', 'Single-phase earth fault', 'Primary', 'Temporary', 'Non-intermittent', 'Lightning', datetime.timedelta(0)), (2, '2020-1', 'Circuit breakers', '400 kV', 'Own', 'Component', 'Direct earthed', 'Function failing to occur', 'Secondary/latent fault', 'Permanent', 'Non-intermittent', 'Technical equipment', datetime.timedelta(days=2))]
+[('Line X-Y', 1, 'Line', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after repair', datetime.timedelta(days=2)), ('Power transformer Y', 1, 'Power transformer', '7 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700)), ('Line Y-Z', 2, 'Line', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700)), ('Busbar Y', 2, 'Busbar', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700))]
+[('Power transformer', '2020-1', datetime.timedelta(seconds=2700)), ('Power transformer', '2020-1', datetime.timedelta(seconds=1800))]
+
+For input data format, please refer to \modification_exp.py
