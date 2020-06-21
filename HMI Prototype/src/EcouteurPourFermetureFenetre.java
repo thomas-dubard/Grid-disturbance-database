@@ -1,7 +1,9 @@
 import java.awt.event.*;
 
-/** Classe conçue pour écouter les événements "fermeture fenêtre" afin
-    d'arrêter proprement l'application lorsqu'on ferme la fenêtre. */
+/** Class conceived to listen windowClosing Events to close the application when the window is closed
+ * 
+ *
+ */
 public class EcouteurPourFermetureFenetre extends WindowAdapter {
   // Remarque : faire hériter cette classe de WindowAdapter permet d'implanter
   //            l'interface WindowListener sans avoir à redéfinir TOUTES 

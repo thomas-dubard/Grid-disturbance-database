@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"App"},{"p":"<Unnamed>","l":"Disturbance"},{"p":"<Unnamed>","l":"EcouteurPourFermetureFenetre"},{"p":"<Unnamed>","l":"Fault"},{"p":"<Unnamed>","l":"Interruption"},{"p":"<Unnamed>","l":"Outage"}]

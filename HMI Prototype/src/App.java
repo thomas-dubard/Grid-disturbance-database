@@ -2,12 +2,28 @@
 import java.awt.*;
 import java.awt.event.*;
 
-public class App extends Frame implements ItemListener,ActionListener {
+import py4j.GatewayServer;
+/*import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;*/
+
+/**
+ * An instance of App will generate a window on which 4 choices are available depending on whether disturbance, fault, outage or interruption is to be recorded.
+ * @author Leconte
+ *
+ */
+
+public class App extends Frame implements ActionListener {
 	private Choice table;
 	private Button ok;
 	public FlowLayout f;
 	private Label msg;
+	public Disturbance dist;
 	
+	/**
+	 * Constructor App creates a new instance of App, generating a window on which 4 choices are available depending on whether disturbance, fault, outage or interruption is to be recorded.
+	 */
 	public App () {
 		table = new Choice ();
 		table.add("------");
@@ -31,12 +47,29 @@ public class App extends Frame implements ItemListener,ActionListener {
 		addWindowListener(new EcouteurPourFermetureFenetre()); 
 		ok.addActionListener(this);
 	}
+	/**
+	 * Creates a new instance of App and waits for a python script to interact with it threw the py4j module. Please see the cote_python.py documentation for further informations.
+	 * @param args
+	 * 			Should not be completed
+	 */
 	public static void main(String[] args) {
 		 App appli = new App();
 		 appli.setLocation(100, 100);
 		 appli.setSize(600, 450);
-		 appli.setVisible(true);
+		 appli.setVisible(false);
+		GatewayServer server = new GatewayServer(appli);
+	    server.start();
 	}
+	/**
+	 * Closes the App window and opens a Disturbance/Outage/Fault/Interruption window according to which table is selected on the App window when the "OK" button is clicked. If no table is selected, "Please select a valid table is displayed".
+	 * 
+	 * @param evt
+	 * 			An ActionEvent, it does have consequences only when the "OK" button is clicked.
+	 * @see Disturbance
+	 * @see Outage
+	 * @see Fault
+	 * @see Interruption
+	 */
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource()==ok) {
 			String item = table.getSelectedItem();
@@ -44,7 +77,7 @@ public class App extends Frame implements ItemListener,ActionListener {
 			case "Disturbance":
 				
 				this.setVisible(false);
-				Disturbance dist = new Disturbance ();
+				dist = new Disturbance ();
 				dist.setVisible(true);
 				dist.setSize(600, 450);
 				break;
@@ -71,12 +104,5 @@ public class App extends Frame implements ItemListener,ActionListener {
 				break;
 			}
 		}
-	}
-	
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -1,7 +1,8 @@
 # host = '127.0.0.1'
-# port = 3306
-host = '192.168.0.103'
+
 # ========== Saisir ci-dessous ==============
+port = 3306
+host = ''  # Saisir votre adresse IP ici
 user, passwd = 'thomas', 'Dubard.113'
 # ========== Saisir ci-dessus  ==============
 db = 'PICHE'

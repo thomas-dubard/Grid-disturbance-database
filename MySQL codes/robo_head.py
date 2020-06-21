@@ -4,7 +4,8 @@ from user_info import *
 
 def db_init(db):
     try:
-        conn = pymysql.connect(host, user, passwd, db, charset="utf8")
+        conn = pymysql.connect(host, user, passwd, db,
+                               port=port, charset="utf8")
         print("Access granted.")
         return 1
     except pymysql.err.OperationalError as e:
@@ -13,7 +14,7 @@ def db_init(db):
 
 
 def db_init_all(db):
-    conn = pymysql.connect(host, user, passwd, db, charset="utf8")
+    conn = pymysql.connect(host, user, passwd, db, port=port, charset="utf8")
     c = conn.cursor()
     c.execute('''CREATE TABLE DISTURBANCE
         (id   CHAR(16) PRIMARY KEY  NOT NULL,
@@ -62,7 +63,7 @@ def db_init_all(db):
 
 
 def db_insert_disturbance(db, disturb):
-    conn = pymysql.connect(host, user, passwd, db, charset="utf8")
+    conn = pymysql.connect(host, user, passwd, db, port=port, charset="utf8")
     c = conn.cursor()
 
     c.execute(f"INSERT INTO DISTURBANCE(id,date,time) \
@@ -74,7 +75,7 @@ def db_insert_disturbance(db, disturb):
 
 
 def db_insert_fault(db, disturb, fault):
-    conn = pymysql.connect(host, user, passwd, db, charset="utf8")
+    conn = pymysql.connect(host, user, passwd, db, port=port, charset="utf8")
     c = conn.cursor()
     '''
     sql_command = "INSERT INTO FAULT(serial, \
@@ -95,7 +96,7 @@ def db_insert_fault(db, disturb, fault):
 
 
 def db_insert_outage(db, outage):
-    conn = pymysql.connect(host, user, passwd, db, charset="utf8")
+    conn = pymysql.connect(host, user, passwd, db, port=port, charset="utf8")
     c = conn.cursor()
 
     c.execute(f"INSERT INTO outage(unit, fault, type, ens, \
@@ -107,7 +108,7 @@ def db_insert_outage(db, outage):
 
 
 def db_insert_interruption(db, disturb, interrupt):
-    conn = pymysql.connect(host, user, passwd, db, charset="utf8")
+    conn = pymysql.connect(host, user, passwd, db, port=port, charset="utf8")
     c = conn.cursor()
 
     sql_command = (interrupt[0], disturb, interrupt[1])
@@ -120,7 +121,7 @@ def db_insert_interruption(db, disturb, interrupt):
 
 
 def db_select_disturbance(db, disturb):
-    conn = pymysql.connect(host, user, passwd, db, charset="utf8")
+    conn = pymysql.connect(host, user, passwd, db, port=port, charset="utf8")
     c = conn.cursor()
     res = {}
 

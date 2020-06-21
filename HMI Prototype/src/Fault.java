@@ -2,6 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
+/**
+ * Class conceived to create a window for Fault inputs
+ *
+ */
 public class Fault extends Frame implements ActionListener{
 	private Label serialLabel;
 	private TextField serial;
@@ -24,6 +28,9 @@ public class Fault extends Frame implements ActionListener{
 	
 	private Button save;
 	
+	/**
+	 * Creates a new instance of Fault, displaying a window to save a new fault.
+	 */
 	public Fault () {
 		serialLabel= new Label("Serial Number");
 		serial = new TextField(40);
@@ -117,7 +124,10 @@ public class Fault extends Frame implements ActionListener{
 		addWindowListener(new EcouteurPourFermetureFenetre()); 
 		
 	}
-	
+	/**
+	 * When the "Save" Button is clicked, all the data inserted is converted to String,
+	 * the different components being separated by the "%" symbol. This String is written in ToSave.txt file. 
+	 */
 	public void actionPerformed (ActionEvent e) {
 		if (e.getSource()==save) {
 			try {
