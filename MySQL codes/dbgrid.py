@@ -1,6 +1,5 @@
 import pymysql
 import time
-import hashlib
 
 
 class DbGrid:
@@ -247,10 +246,14 @@ class DbGrid:
             if len(c.fetchall()) > 0:
                 pass
             else:
-                print(f"No such disturbance {disturb} found.")
+                print(f"No such disturbance '{disturb}' found.")
+                c.close()
+                conn.close()
                 return
         except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
             print(f"Error : {e}")
+            c.close()
+            conn.close()
             return
         # Insertion
         try:
@@ -264,3 +267,111 @@ class DbGrid:
         conn.commit()
         c.close()
         conn.close()
+
+    def select_interruption(self, disturb):
+        '''
+        Select all interruption records by a disturbance's id.
+        '''
+        # Connection
+        conn = self.connect()
+        if type(conn) == 'bool':
+            return
+        c = conn.cursor()
+        res = {}
+        res['interruption'] = []
+        # Select interruption(s)
+        try:
+            sql_command = f"SELECT * FROM interruption WHERE ref = '{disturb}'"
+            c.execute(sql_command)
+            for interruption in c.fetchall():
+                res['interruption'].append(interruption)
+            if len(res['interruption']) == 0:
+                print(f'No interruption found for disturbance {disturb}.')
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e} in interruption selection.")
+        # Update
+        c.close()
+        conn.close()
+        return res
+
+    def select_outage(self, fault):
+        '''
+        Select all outage records by a fault's id.
+        '''
+        # Connection
+        conn = self.connect()
+        if type(conn) == 'bool':
+            return
+        c = conn.cursor()
+        res = {}
+        res['outage'] = []
+        # Select outage(s)
+        try:
+            sql_command = f"SELECT * FROM outage WHERE fault = {fault}"
+            c.execute(sql_command)
+            for outage in c.fetchall():
+                res['outage'].append(outage)
+            if len(res['outage']) == 0:
+                print(f'No outage found for fault {fault}.')
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e} in outage selection.")
+        c.close()
+        conn.close()
+        return res
+
+    def select_fault(self, disturb):
+        '''
+        Select fault records by disturbance's id.
+        Its associated outages
+        would also be extracted.
+        '''
+        # Connection
+        conn = self.connect()
+        if type(conn) == 'bool':
+            return
+        c = conn.cursor()
+        res = {'fault': [], 'outage': []}
+        # Select fault(s)
+        try:
+            sql_command = f"SELECT * FROM fault WHERE ref = '{disturb}'"
+            c.execute(sql_command)
+            for fault in c.fetchall():
+                res['fault'].append(fault)
+                res['outage'].extend(self.select_outage(fault[0])['outage'])
+            if len(res['fault']) == 0:
+                print(f"No fault found for disturbance '{disturb}'.")
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e} in fault selection.")
+        c.close()
+        conn.close()
+        return res
+
+    def select_disturbance(self, disturb):
+        '''
+        Select one disturbance record by its id.
+        Its associated faults, outages and interruptions
+        would also be extracted.
+        '''
+        # Connection
+        conn = self.connect()
+        if type(conn) == 'bool':
+            return
+        c = conn.cursor()
+        res = {'disturbance': [], 'interruption': [],
+               'fault': [], 'outage': []}
+        # Select disturbance
+        try:
+            sql_command = f"SELECT * FROM disturbance WHERE id = '{disturb}'"
+            c.execute(sql_command)
+            for dist in c.fetchall():
+                res['disturbance'].append(dist)
+                res_fault = self.select_fault(dist[0])
+                res['fault'].extend(res_fault['fault'])
+                res['outage'].extend(res_fault['outage'])
+                res['interruption'].extend(
+                    self.select_interruption(dist[0])['interruption'])
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e} in disturbance selection.")
+        c.close()
+        conn.close()
+        return res
