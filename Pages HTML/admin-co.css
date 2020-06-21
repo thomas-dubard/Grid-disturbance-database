@@ -1,0 +1,30 @@
+body {
+    text-align: center;
+}
+
+.container {
+    display:grid;
+    grid-template-rows: 
+    1fr 1fr 1fr 1fr;
+    grid-template-columns: auto;
+    grid-template-areas: 
+    "header"
+    "description"
+    "conectpad"
+    "notification";
+    height:auto;
+    width:auto;
+}
+
+.connectpad {
+    display: grid;
+    grid-template-columns: 
+    1fr 1fr;
+    grid-template-rows:
+    1fr 1fr;
+    grid-template-areas: 
+    "id-header pw-header"
+    "id-insert pw-insert";
+    height: auto;
+    width: auto;
+}
