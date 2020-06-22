@@ -49,7 +49,7 @@ class DbGrid:
             c.execute('''CREATE TABLE Disturbance
             (id   CHAR(16) PRIMARY KEY  NOT NULL,
             date  DATE  NOT NULL,
-            time  TIME  NOT NULL)''')
+            time  TIME  NOT NULL);''')
             print("Table DISTURBANCE created successfully.")
         except pymysql.err.InternalError as e:
             print(f"Error : {e}")
@@ -93,11 +93,25 @@ class DbGrid:
             c.execute('''CREATE TABLE Outage
             (unit  TEXT  NOT NULL,
             fault  INT  NOT NULL,
-            type TEXT NOT NULL,
+            type ENUM ('Power transformer',
+            'Overhead line',
+            'Cable',
+            'Reactor',
+            'Bushbar',
+            'Series capacitor',
+            'Shunt capacitor',
+            'SVC') NOT NULL,
             ens TEXT NOT NULL,
             interrup TIME NOT NULL,
-            discon TEXT NOT NULL,
-            reclos TEXT NOT NULL,
+            discon ENUM ('Automatically','Automatically with unsucessful automatic reclosing','Manually') NOT NULL,
+            reclos ENUM ('Automatically after less than 2 seconds',
+            'Automatically after more than 2 seconds',
+            'Manually after restructuring of operation',
+            'Manually after inspection',
+            'Manually after repair',
+            'Manually without either inspection, repair or restructuring of operation',
+            'Unknown',
+            'Others') NOT NULL,
             duration TIME NOT NULL);''')
             print("Table OUTAGE created successfully.")
         except pymysql.err.InternalError as e:
