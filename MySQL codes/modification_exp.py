@@ -1,6 +1,7 @@
 from dbgrid import *
+import time
 
-piche = DbGrid('Piche', '127.0.0.1', 'thomas', 'Dubard.113')
+piche = DbGrid('Piche', '127.0.0.1', 'Aline', '123456789')
 
 # The codes belows as remark are code examples for test/debug
 # of the attributes in the classe DbGrid
@@ -72,4 +73,20 @@ print(res['disturbance'])
 print(res['fault'])
 print(res['outage'])
 print(res['interruption'])
+'''
+
+'''  # test code for fetch_table / OK
+print(piche.fetch_table('interruption'))
+'''
+
+'''  # test code for create_user / OK
+print(mysql.root_connection())
+mysql.create_user('Piche', 'Aline', '123456789')
+mdm = DbGrid('Piche', '127.0.0.1', 'Aline', '123456789')
+print(mdm.connect())
+'''
+
+'''  # test code for remove_user / OK
+print(mysql.root_connection())
+mysql.remove_user('Aline', '%')
 '''

@@ -415,7 +415,7 @@ class DbGrid:
 
     def root_connection(self):
         '''
-        Connect to the database as a root user
+        Connect to the database as a root user.
         '''
         if self.user == 'root':
             conn = self.connect()
@@ -428,5 +428,62 @@ class DbGrid:
             print('Not a root account.')
             return False
 
-    def create_user(self, user, passwd):
-        pass
+    def create_user(self, db, user, passwd, host='localhost'):
+        '''
+        Create a basic user for a database.
+        'db' str: name of the database;
+        'user' str : username;
+        'passwd' str : password;
+        'host' str : permitted connection IP.
+        '''
+        if self.root_connection:
+            pass
+        else:
+            print('Root account needed for connexion.')
+            return
+        # Connection
+        conn = self.connect()
+        if type(conn) == bool:
+            return
+        c = conn.cursor()
+        # Execution
+        try:
+            sql0 = f"CREATE USER '{user}'@'{host}' \
+                   IDENTIFIED BY '{passwd}';"
+            sql1 = f"GRANT UPDATE, DELETE, INSERT, SELECT \
+                   ON {db}.* TO '{user}'@'{host}';"
+            sql2 = "flush privileges;"
+            c.execute(sql0)
+            c.execute(sql1)
+            c.execute(sql2)
+            print(f"'{user}'@'{host}' added successfully.")
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e}")
+        c.close()
+        conn.close()
+
+    def remove_user(self, user, host='localhost'):
+        '''
+        Delete a basic user.
+        'user' str : username;
+        'host' str : permitted connection IP.
+        '''
+        if self.root_connection:
+            pass
+        else:
+            print('Root account needed for connexion.')
+            return
+        # Connection
+        conn = self.connect()
+        if type(conn) == bool:
+            return
+        c = conn.cursor()
+        # Execution
+        try:
+            sql0 = f"DROP USER '{user}'@'{host}';"
+            c.execute(sql0)
+            print(f"'{user}'@'{host}' removed successfully.")
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e}")
+        c.close()
+        conn.close()
