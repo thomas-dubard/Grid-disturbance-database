@@ -1,5 +1,4 @@
 import pymysql
-import time
 
 
 class DbGrid:
@@ -19,7 +18,7 @@ class DbGrid:
         self.passwd = passwd  # password
         self.port = port  # port of IP (optional)
         self.charset = charset  # data format (optional)
-        print("Class initialized.")
+        # print("Class initialized.")
 
     def connect(self):
         try:
@@ -142,7 +141,7 @@ class DbGrid:
               information_schema.TABLES WHERE\
               table_schema = 'piche' and table_name like '{tb}';"
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         c = conn.cursor(pymysql.cursors.DictCursor)
         # c = conn.cursor()
@@ -168,7 +167,7 @@ class DbGrid:
         disturb.insert(0, dist_id)
         # Conection
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         # Insertion
         c = conn.cursor()
@@ -194,7 +193,7 @@ class DbGrid:
         fault_nr = self.get_info('fault') + 1
         # Conection
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         # Insertion
         c = conn.cursor()
@@ -225,7 +224,7 @@ class DbGrid:
             return
         # Conection
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         # Insertion
         c = conn.cursor()
@@ -251,7 +250,7 @@ class DbGrid:
         '''
         # Conection
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         c = conn.cursor()
         # Verification
@@ -290,7 +289,7 @@ class DbGrid:
         '''
         # Connection
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         c = conn.cursor()
         res = {}
@@ -316,7 +315,7 @@ class DbGrid:
         '''
         # Connection
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         c = conn.cursor()
         res = {}
@@ -343,7 +342,7 @@ class DbGrid:
         '''
         # Connection
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         c = conn.cursor()
         res = {'fault': [], 'outage': []}
@@ -370,7 +369,7 @@ class DbGrid:
         '''
         # Connection
         conn = self.connect()
-        if type(conn) == 'bool':
+        if type(conn) == bool:
             return
         c = conn.cursor()
         res = {'disturbance': [], 'interruption': [],
@@ -391,3 +390,43 @@ class DbGrid:
         c.close()
         conn.close()
         return res
+
+    def fetch_table(self, tb):
+        '''
+        Return a table of records.
+        '''
+        res = []
+        # Connection
+        conn = self.connect()
+        if type(conn) == bool:
+            return
+        c = conn.cursor()
+        # Fetch
+        try:
+            sql_command = f"SELECT * FROM {tb}"
+            c.execute(sql_command)
+            for item in c.fetchall():
+                res.append(item)
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+            print(f"Error : {e} in {tb} selection.")
+        c.close()
+        conn.close()
+        return res
+
+    def root_connection(self):
+        '''
+        Connect to the database as a root user
+        '''
+        if self.user == 'root':
+            conn = self.connect()
+            if type(conn) == bool:
+                return False
+            else:
+                conn.close()
+                return True
+        else:
+            print('Not a root account.')
+            return False
+
+    def create_user(self, user, passwd):
+        pass
