@@ -103,13 +103,15 @@ class DbGrid:
             'SVC') NOT NULL,
             ens TEXT NOT NULL,
             interrup TIME NOT NULL,
-            discon ENUM ('Automatically','Automatically with unsucessful automatic reclosing','Manually') NOT NULL,
+            discon ENUM ('Automatically','Automatically \
+            with unsucessful automatic reclosing','Manually') NOT NULL,
             reclos ENUM ('Automatically after less than 2 seconds',
             'Automatically after more than 2 seconds',
             'Manually after restructuring of operation',
             'Manually after inspection',
             'Manually after repair',
-            'Manually without either inspection, repair or restructuring of operation',
+            'Manually without either inspection, \
+            repair or restructuring of operation',
             'Unknown',
             'Others') NOT NULL,
             duration TIME NOT NULL);''')
