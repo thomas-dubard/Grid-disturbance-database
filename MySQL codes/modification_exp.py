@@ -1,5 +1,4 @@
 from dbgrid import *
-import time
 
 piche = DbGrid('Piche', '127.0.0.1', 'Aline', '123456789')
 
@@ -18,7 +17,7 @@ piche.insert_disturbance(dtbt)
 '''
 
 '''  # test code for insert_fault / OK
-ft = [('Line', '400 kV', 'Own', 'Component', 'Direct earthed',
+ft = [('Power transformers', '400 kV', 'Own', 'Component', 'Direct earthed',
        'Single-phase earth fault', 'Primary', 'Temporary',
        'Non-intermittent', 'Lightning', '00:00:00'),
       ('Circuit breakers', '400 kV', 'Own', 'Component',
@@ -27,15 +26,15 @@ ft = [('Line', '400 kV', 'Own', 'Component', 'Direct earthed',
        'Non-intermittent', 'Technical equipment', '48:00:00')
       ]
 for fault in ft:
-    piche.insert_fault('2020-2', fault)
+    piche.insert_fault('2020-3', fault)
 '''
 
 '''  # test code for insert_outage / OK
-ot = [('Line X-Y', 4, 'Line', '0 MWh', '00:00:00', 'Automatically',
+ot = [('Line X-Y', 4, 'Overhead line', '0 MWh', '00:00:00', 'Automatically',
        'Manually after repair', '48:00:00'),
-      ('Line Y-Z', 3, 'Line', '0 MWh', '00:00:00', 'Automatically',
+      ('Line Y-Z', 3, 'Overhead line', '0 MWh', '00:00:00', 'Automatically',
        'Manually after inspection', '00:45:00'),
-      ('Busbar Y', 2, 'Busbar', '0 MWh', '00:00:00', 'Automatically',
+      ('Busbar Y', 2, 'Bushbar', '0 MWh', '00:00:00', 'Automatically',
        'Manually after inspection', '00:45:00'),
       ('Power transformer Y', 1, 'Power transformer', '7 MWh', '00:00:00',
        'Automatically', 'Manually after inspection', '00:45:00')
@@ -45,9 +44,9 @@ for outage in ot:
 '''
 
 '''  # test code for insert_interruption / OK
-ip = [('Power transformer', '00:15:00')]
+ip = [('Power transformer', '00:45:00')]
 for interrupt in ip:
-    piche.insert_interruption('2020-1', interrupt)
+    piche.insert_interruption('2020-3', interrupt)
 '''
 
 '''  # test code for select_interruption / OK

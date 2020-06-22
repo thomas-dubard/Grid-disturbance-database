@@ -1,4 +1,5 @@
 import pymysql
+import time
 
 
 class DbGrid:
@@ -51,29 +52,29 @@ class DbGrid:
             date  DATE  NOT NULL,
             time  TIME  NOT NULL);''')
             print("Table DISTURBANCE created successfully.")
-        except pymysql.err.InternalError as e:
+        except (pymysql.err.InternalError, pymysql.err.OperationalError) as e:
             print(f"Error : {e}")
 
         try:
             c.execute('''CREATE TABLE Fault
             (serial INTEGER PRIMARY KEY NOT NULL,
             ref  CHAR(16)  NOT NULL,
-            ctype ENUM ('Surge arresters and spark gaps',
-            'Circuit breakers',
-            'Disconnectors and earth connectors',
-            'Common ancillary equipment',
-            'Control equipment'
-            'Power cables',
-            'Power transformers',
-            'Overhead lines',
-            'Instrument transformers',
-            'Reactors inclusive of neutral point reactors',
-            'Synchronous compensators',
-            'Busbars',
-            'Series capacitors',
-            'Shunt capacitor batteries and filters',
-            'SVC and statcom',
-            'Other high-voltage components in stations',
+            ctype ENUM('Surge arresters and spark gaps',\
+            'Circuit breakers',\
+            'Disconnectors and earth connectors',\
+            'Common ancillary equipment',\
+            'Control equipment',\
+            'Power cables',\
+            'Power transformers',\
+            'Overhead lines',\
+            'Instrument transformers',\
+            'Reactors inclusive of neutral point reactors',\
+            'Synchronous compensators',\
+            'Busbars',\
+            'Series capacitors',\
+            'Shunt capacitor batteries and filters',\
+            'SVC and statcom',\
+            'Other high-voltage components in stations',\
             'Unknown'),
             voltage TEXT NOT NULL,
             ground TEXT NOT NULL,
@@ -86,7 +87,7 @@ class DbGrid:
             cause TEXT NOT NULL,
             repair TIME);''')
             print("Table FAULT created successfully.")
-        except pymysql.err.InternalError as e:
+        except (pymysql.err.InternalError, pymysql.err.OperationalError) as e:
             print(f"Error : {e}")
 
         try:
@@ -116,7 +117,7 @@ class DbGrid:
             'Others') NOT NULL,
             duration TIME NOT NULL);''')
             print("Table OUTAGE created successfully.")
-        except pymysql.err.InternalError as e:
+        except (pymysql.err.InternalError, pymysql.err.OperationalError) as e:
             print(f"Error : {e}")
 
         try:
@@ -143,7 +144,8 @@ class DbGrid:
             try:
                 c.execute(f'''DROP TABLE {i};''')
                 print(f"Table {i} deleted successfully.")
-            except pymysql.err.InternalError as e:
+            except (pymysql.err.InternalError,
+                    pymysql.err.OperationalError) as e:
                 print(f"Error : {e}")
 
         conn.commit()
@@ -288,7 +290,7 @@ class DbGrid:
             return
         # Insertion
         try:
-            sql_command = (interrupt[0], disturb, interrupt[1])
+            sql_command = (itrpt[0], disturb, itrpt[1])
             c.execute(f"INSERT INTO interruption(delivery, \
                       ref, duration) VALUES {sql_command}")
             print(f"Interruption {itrpt} added successfully.")
