@@ -23,8 +23,18 @@ body {
     auto;
     grid-template-areas: 
     "id-header id-input"
-    "date-header date-input"
-    "time-header time-input";
+    "ref-header ref-input"
+    "comp-header comp-input"
+    "volt-header volt-input"
+    "sys-header sys-input"
+    "own-header own-input"
+    "type0-header type0-input"
+    "type1-header type1-input"
+    "type2-header type2-input"
+    "type3-header type3-input"
+    "type4-header type4-input"
+    "cause-header cause-input"
+    "repair-header repair-input";
     height: auto;
     width: auto;
 }
