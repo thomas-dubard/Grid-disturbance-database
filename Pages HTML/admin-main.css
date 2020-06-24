@@ -5,27 +5,22 @@ body {
 .container {
     display:grid;
     grid-template-rows: 
-    1fr 1fr 1fr 1fr 1fr;
+    1fr 1fr;
     grid-template-columns: auto;
     grid-template-areas: 
     "header"
-    "description"
-    "conectpad"
-    "connectbutton"
-    "notification";
+    "buttonpad";
     height:auto;
     width:auto;
 }
 
-.connectpad {
+.buttonpad {
     display: grid;
     grid-template-columns: 
     1fr 1fr;
-    grid-template-rows:
-    1fr 1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
-    "id-header pw-header"
-    "id-insert pw-insert";
+    "to-hist to-input";
     height: auto;
     width: auto;
 }
