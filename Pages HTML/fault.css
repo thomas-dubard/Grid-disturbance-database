@@ -1,4 +1,6 @@
 body {
+    background-color: navy;
+    color: white;
     text-align: center;
 }
 
@@ -13,6 +15,7 @@ body {
     "inputpad";
     height:auto;
     width:auto;
+    justify-items: center;
 }
 
 .inputpad {
@@ -37,4 +40,19 @@ body {
     "repair-header repair-input";
     height: auto;
     width: auto;
+    justify-items: center;
+}
+
+#button {
+    padding: 2px;
+    border: 1px solid blue;
+    border-radius: 3px;
+    background-color: gainsboro;
+    width: max-content;
+    height: max-content;
+    color: black;
+  }
+
+#button:hover {
+    background-color: whitesmoke;
 }

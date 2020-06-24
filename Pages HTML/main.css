@@ -1,8 +1,11 @@
 body {
+    background-color: navy;
+    color: white;
     text-align: center;
 }
 
 .container {
+    padding: 0cm;
     display:grid;
     grid-template-rows: 
     1fr 1fr;
@@ -12,6 +15,7 @@ body {
     "buttonpad";
     height:auto;
     width:auto;
+    justify-items: center;
 }
 
 .buttonpad {
@@ -23,4 +27,19 @@ body {
     "to-request to-admin";
     height: auto;
     width: auto;
+    justify-items: center;
+}
+
+#button {
+    padding: 2px;
+    border: 1px solid blue;
+    border-radius: 3px;
+    background-color: gainsboro;
+    width: max-content;
+    height: max-content;
+    color: black;
+  }
+
+#button:hover {
+    background-color: whitesmoke;
 }
