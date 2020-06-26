@@ -5,7 +5,6 @@ body {
 }
 
 .container {
-    padding: 0cm;
     display:grid;
     grid-template-rows: 
     1fr 1fr;
@@ -24,7 +23,7 @@ body {
     1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
-    "to-request to-admin";
+    "to-hist to-input";
     height: auto;
     width: auto;
     justify-items: center;
