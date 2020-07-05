@@ -79,41 +79,70 @@
                     </svg>
                     <br> <i> Component Fault or System Disturbance </i>
                 </div>
-                <div class="type1-header"> Fault Types </div>
-                <div class="type1-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="type1-header"> <br> 
+                    <b> Fault Types </b> <br>
+                    One fault can consist of several fault types. <br>
+                    If a fault consists of several fault types, the most significant fault type is used. <br>
+                    In case of developing faults, that is in faults changing from one type to another, <br>
+                    the final type is given.
                 </div>
-                <div class="type2-header"> Primary Fault or Secondary/Latent Fault </div>
-                <div class="type2-input" id="input-box">
+                <div class="type1-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Please see all different types in the document. </i>
                 </div>
-                <div class="type3-header"> Temporary or Permanent Fault </div>
-                <div class="type3-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="type2-header"> <br>
+                    <b> Primary Fault or Secondary/Latent Fault </b> <br>
+                    The statistics do not distinguish between secondary and latent faults.
                 </div>
-                <div class="type4-header"> Intermittent or Non-intermittent Fault </div>
-                <div class="type4-input" id="input-box">
+                <div class="type2-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Primary or Secondary/Latent Fault </i>
                 </div>
-                <div class="cause-header"> Fault Cause </div>
-                <div class="cause-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="type3-header"> <br>
+                    <b> Temporary or Permanent Fault </b> <br>
+                    See sections 5.2.4 and 5.2.5.
                 </div>
-                <div class="repair-header"> Repair time </div>
-                <div class="repair-input" id="input-box">
+                <div class="type3-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Temporary or Permanent Fault </i>
+                </div>
+                <div class="type4-header"> <br>
+                    <b> Intermittent or Non-intermittent Fault </b> <br>
+                    See Section 4.2.6.
+                </div>
+                <div class="type4-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> Intermittent or Non-intermittent Fault </i>
+                </div>
+                <div class="cause-header"> <br>
+                    <b> Fault Cause </b> <br>
+                    The fault cause must always be reported. <br>
+                    If the fault cause is a combination of several fault causes, choose the most signifi-cant one.
+                </div>
+                <div class="cause-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> See Section 4.2.9 </i>
+                </div>
+                <div class="repair-header"> <br>
+                    <b> Repair time </b> <br>
+                    Not required but may be useful for internal use. <br>
+                    Voluntary waiting time should not be included.
+                </div>
+                <div class="repair-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> Must be given in hours and minutes. See Section 4.4.11. </i> 
                 </div>
             </div>
             <div class="inputbutton" id="button"> Done </div>

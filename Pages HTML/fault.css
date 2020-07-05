@@ -11,8 +11,7 @@ body {
     grid-template-columns: auto;
     grid-template-areas: 
     "header"
-    "description"
-    "inputpad";
+    "description";
     height:auto;
     width:auto;
     justify-items: center;
