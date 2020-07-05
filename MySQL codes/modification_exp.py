@@ -1,6 +1,9 @@
 from dbgrid import *
 
+# limited user
 piche = DbGrid('Piche', '127.0.0.1', 'Aline', '123456789')
+# root user  ## encrypted, to be adapted
+mysql = DbGrid('Piche', '127.0.0.1', 'root', '***********')
 
 # The codes belows as remark are code examples for test/debug
 # of the attributes in the classe DbGrid
