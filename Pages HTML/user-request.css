@@ -5,13 +5,13 @@ body {
 }
 
 .container {
-    padding: 0cm;
     display:grid;
     grid-template-rows: 
-    1fr 1fr;
+    1fr 1fr 1fr;
     grid-template-columns: auto;
     grid-template-areas: 
     "header"
+    "description"
     "buttonpad";
     height:auto;
     width:auto;
@@ -22,9 +22,11 @@ body {
     display: grid;
     grid-template-columns: 
     1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows:
+    1fr 1fr;
     grid-template-areas: 
-    "to-request to-admin";
+    "to-grid-dist to-fault"
+    "to-outage to-interrupt";
     height: auto;
     width: auto;
     justify-items: center;
