@@ -20,7 +20,7 @@ To execute these code, you need :
 
 Explain how to run the automated tests for this system
 
-To run the test for the functions in the class DBGrid test_demo_MySQL.py, it is necessary to filled in the file : the name and adress of the database MySQL created for data storage. Then run the file test_demo_MySQL.py in the terminal. Expected outputs are demonstrated in the file test_demo_MySQL_expected_output.txt.
+To run the test program test_demo_MySQL.py for the functions in the class DBGrid (in dbgrid.py), it is necessary to fill in the file : the name and adress of the database MySQL created for data storage. Then run the file test_demo_MySQL.py in the terminal. Expected outputs are demonstrated in the file test_demo_MySQL_expected_output.txt.
 
 ### Break down into end to end tests
 
