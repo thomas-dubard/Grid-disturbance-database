@@ -3,19 +3,23 @@
         <title>
             Grid disturbance database - Admin Main Page
         </title>
-        <link rel="stylesheet" href="admin-main.css">
+        <link rel="stylesheet" href="\static\css\admin-main.css">
     </head>
     <body>
         <div class="container">
             <div class="header">
-                Admin Main Page
+                <h1> Admin Main Page </h1>
             </div>
             <div class="buttonpad">
                 <div class="to-hist" id="button">
-                    <a class="link" href="admin-hist.html" title="History page"> History Page</a>
+                    <a class="link" href="{% url "admin-hist" %}" title="History page">
+                        History Page
+                    </a>
                 </div>
                 <div class="to-input" id="button">
-                    <a class="link" href="admin-input.html" title="Input page"> Data Input Page</a>
+                    <a class="link" href="{% url "admin-input" %}" title="Input page">
+                        Data Input Page
+                    </a>
                 </div>
             </div>
         </div>

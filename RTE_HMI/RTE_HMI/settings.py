@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import pymysql
+#import pymysql
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'RTE_HMI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -92,14 +92,19 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "testapp",
+        'USER': 'aniss',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+"""
 
 # Fake PyMySQL's version and install as MySQLdb
 # https://adamj.eu/tech/2020/02/04/how-to-use-pymysql-with-django/
-pymysql.version_info = (1, 4, 2, "final", 0)
+"""pymysql.version_info = (1, 4, 2, "final", 0)
 pymysql.install_as_MySQLdb()
-
+"""
 
 
 # Password validation
@@ -143,3 +148,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+LOGIN_REDIRECT_URL = '/account/list/'

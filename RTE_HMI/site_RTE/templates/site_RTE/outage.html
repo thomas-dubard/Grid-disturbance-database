@@ -3,67 +3,101 @@
         <title>
             Grid disturbance database - Outage Input Page
         </title>
-        <link rel="stylesheet" href="outage.css">
+        <link rel="stylesheet" href="\static\css\outage.css">
     </head>
     <body>
         <div class="container">
             <div class="header">
-                Outage Input Page
+                <h1> Outage Input Page </h1>
             </div>
-            <div class="description">
+            <div class="description"> <br>
                 This page is meant to upload new Outages into the database.<br>
                 Once you have finished, you can return to the <a class="link" href="admin-main.html" title="Admin Home page"> Admin Home Page </a>.
             </div>
             <div class="inputpad">
-                <div class="id-header"> System Unit </div>
-                <div class="id-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="id-header"> <br>
+                    <b> System Unit </b> <br>
+                    The name of the system unit is used to calculate <br>
+                    how often the same system unit is affected by outage.
                 </div>
-                <div class="ref-header"> Fault Causing the Outage </div>
-                <div class="ref-input" id="input-box">
+                <div class="id-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Identification of the system unit affected by outage. </i>
                 </div>
-                <div class="type-header"> Type of System Unit </div>
-                <div class="type-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="ref-header"> <br>
+                    <b> Fault Causing the Outage </b> <br>
+                    If two faults occur within the same system unit <br>
+                    the fault causing the outage of the longest duration will be chosen.
                 </div>
-                <div class="ens-header"> Energy Not Supplied </div>
-                <div class="ens-input" id="input-box">
+                <div class="ref-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Serial number of the fault which caused the outage according to Table 5.2.1. </i>
                 </div>
-                <div class="time-header"> Duration of Interruption </div>
-                <div class="time-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="type-header"> <br>
+                    <b> Type of System Unit </b>
                 </div>
-                <div class="char-header"> Characterisation of the disconnection </div>
-                <div class="char-input" id="input-box">
+                <div class="type-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> See Section 4.3. </i>
                 </div>
-                <div class="char2-header"> Characterisation of reclosing </div>
-                <div class="char2-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="ens-header"> <br>
+                    <b> Energy Not Supplied </b> <br>
+                    To calculate ENS the end-user outage must have lasted at least 2 seconds.
                 </div>
-                <div class="time2-header"> Duration of Outage </div>
-                <div class="time2-input" id="input-box">
+                <div class="ens-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> See Section 4.4.8. </i>
+                </div>
+                <div class="time-header"> <br>
+                    <b> Duration of Interruption </b>
+                </div>
+                <div class="time-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> See Section 4.4.4. </i>
+                </div>
+                <div class="char-header"> <br>
+                    <b> Characterisation of the disconnection </b> <br>
+                    In case of a fault in the reclosing automatics resulting in lack of reclosing, <br>
+                    automatically should be chosen as an alternative.
+                </div>
+                <div class="char-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> Automatically (with unsuccessful automatic reclosing) or Manually </i>
+                </div>
+                <div class="char2-header"> <br>
+                    <b> Characterisation of reclosing </b>
+                    If high speed automatic reclosing is successful at one end of a line,<br>
+                    but the line needs to be reclosed manually at the other end, choose manual reclosing.
+                </div>
+                <div class="char2-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> Please see all different types in the document. </i>
+                </div>
+                <div class="time2-header"> <br>
+                    <b> Duration of Outage </b>
+                </div>
+                <div class="time2-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> See Section 4.3.1. </i>
                 </div>
             </div>
+            <div class="inputbutton" id="button"> Done </div>
         </div>
     </body>
 </html>

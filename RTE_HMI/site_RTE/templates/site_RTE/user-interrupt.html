@@ -3,29 +3,36 @@
         <title>
             Grid disturbance database - Interruption Input Page
         </title>
-        <link rel="stylesheet" href="interrupt.css">
+        <link rel="stylesheet" href="\static\css\user-interrupt.css">
     </head>
     <body>
         <div class="container">
             <div class="header">
-                Interruption Input Page
+                <h1> Interruption Search Page </h1>
             </div>
-            <div class="description">
-                This page is meant to upload new Interruptions into the database.<br>
+            <div class="description"> <br>
+                This page is meant to upload new Interruptions into the database. <br>
                 Once you have finished, you can return to the <a class="link" href="main.html" title="Home page"> Home Page </a>.
             </div>
             <div class="inputpad">
-                <div class="id-header"> Name of Delivery Point </div>
-                <div class="id-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="id-header"> <br>
+                    <b> Name of Delivery Point </b> <br>
+                    Not relevant to the compilation of statistics.
                 </div>
-                <div class="time-header"> Duration of Interruption </div>
-                <div class="time-input" id="input-box">
+                <div class="id-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Name of the delivery point affected by outage. </i>
+                </div>
+                <div class="time-header"> <br>
+                    <b> Duration of Interruption </b>
+                </div>
+                <div class="time-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> The time the interruption lasts. </i>
                 </div>
             </div>
             <div class="searchbutton" id="button"> Search </div>

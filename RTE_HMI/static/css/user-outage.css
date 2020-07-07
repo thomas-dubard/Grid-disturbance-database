@@ -1,11 +1,13 @@
 body {
+    background-color: navy;
+    padding: 6px;
+    color: white;
     text-align: center;
 }
 
 .container {
     display:grid;
-    grid-template-rows: 
-    1fr 1fr 1fr;
+    grid-template-rows: auto;
     grid-template-columns: auto;
     grid-template-areas: 
     "header"
@@ -14,7 +16,7 @@ body {
     "searchbutton"
     "result";
     height:auto;
-    width:auto;
+    justify-items: center;
 }
 
 .inputpad {
@@ -34,4 +36,20 @@ body {
     "time2-header time2-input";
     height: auto;
     width: auto;
+    justify-items: center;
+}
+
+#button {
+    padding: 2px;
+    border: 1px solid blue;
+    border-radius: 3px;
+    background-color: gainsboro;
+    width: max-content;
+    height: max-content;
+    color: black;
+    justify-self: center;
+  }
+
+#button:hover {
+    background-color: whitesmoke;
 }

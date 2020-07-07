@@ -3,97 +3,152 @@
         <title>
             Grid disturbance database - Fault Input Page
         </title>
-        <link rel="stylesheet" href="fault.css">
+        <link rel="stylesheet" href="\static\css\fault.css">
     </head>
     <body>
         <div class="container">
             <div class="header">
-                Fault Input Page
+                <h1> Fault Input Page </h1>
             </div>
-            <div class="description">
+            <div class="description"> <br>
                 This page is meant to upload new Faults into the database.<br>
-                Once you have finished, you can return to the <a class="link" href="admin-main.html" title="Admin Home page"> Admin Home Page </a>.
+                Once you have finished, you can return to the 
+                <a class="link" href="{% url "admin-main" %}" title="Admin Home page">
+                    Admin Home page
+                </a>
             </div>
             <div class="inputpad">
-                <div class="id-header"> Serial Number </div>
-                <div class="id-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="id-header"> <br>
+                    <b> Serial Number </b> <br>
+                    The serial number counts from one for every grid disturbance.
                 </div>
-                <div class="ref-header"> Reference to Grid Disturbance </div>
-                <div class="ref-input" id="input-box">
+                <div class="id-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> 1, 2, 3, etc. </i>
                 </div>
-                <div class="comp-header"> Component Type </div>
-                <div class="comp-input" id="input-box">
+                <div class="ref-header"> <br> <b> Reference to Grid Disturbance </b> </div>
+                <div class="ref-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Identification of the disturbance </i>
                 </div>
-                <div class="volt-header"> Voltage Type </div>
-                <div class="volt-input" id="input-box">
+                <div class="comp-header"> <br> <b> Component Type </b> </div>
+                <div class="comp-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> See the classification of components </i>
                 </div>
-                <div class="sys-header"> System Grounding </div>
-                <div class="sys-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="volt-header"> <br>
+                    <b> Voltage Level </b> <br>
+                    Three possible levels
                 </div>
-                <div class="own-header"> Fault in own or other area </div>
-                <div class="own-input" id="input-box">
+                <div class="volt-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> 100-150 kV, 200-330 kV or 380-420 kV </i>
                 </div>
-                <div class="type0-header"> Component fault or System Disturbance </div>
-                <div class="type0-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="sys-header"> <br>
+                    <b> System Grounding </b> <br>
+                    This information is optional for faults in units with reactive <br> compensation with voltages lower than 100 kV.
                 </div>
-                <div class="type1-header"> Fault Types </div>
-                <div class="type1-input" id="input-box">
+                <div class="sys-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Directly earthed or compensated</i>
                 </div>
-                <div class="type2-header"> Primary Fault or Secondary/Latent Fault </div>
-                <div class="type2-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="own-header"> <br>
+                    <b> Fault in own or other area </b> <br>
+                    If the fault occurs in another statistical area, <br> nothing more of the fault needs to be reported.
                 </div>
-                <div class="type3-header"> Temporary or Permanent Fault </div>
-                <div class="type3-input" id="input-box">
+                <div class="own-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Own or other network </i>
                 </div>
-                <div class="type4-header"> Intermittent or Non-intermittent Fault </div>
-                <div class="type4-input" id="input-box">
-                    <svg width=300 height=30>
-                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
-                    </svg>
+                <div class="type0-header"> <br>
+                    <b> Component Fault or System Disturbance </b> <br>
+                    Only system disturbances causing or aggravating <br> a grid disturbance needs to be registered.
                 </div>
-                <div class="cause-header"> Fault Cause </div>
-                <div class="cause-input" id="input-box">
+                <div class="type0-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Component Fault or System Disturbance </i>
                 </div>
-                <div class="repair-header"> Repair time </div>
-                <div class="repair-input" id="input-box">
+                <div class="type1-header"> <br> 
+                    <b> Fault Types </b> <br>
+                    One fault can consist of several fault types. <br>
+                    If a fault consists of several fault types, the most significant fault type is used. <br>
+                    In case of developing faults, that is in faults changing from one type to another, <br>
+                    the final type is given.
+                </div>
+                <div class="type1-input" id="input-box"> <br>
                     <svg width=300 height=30>
                         <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
                     </svg>
+                    <br> <i> Please see all different types in the document. </i>
+                </div>
+                <div class="type2-header"> <br>
+                    <b> Primary Fault or Secondary/Latent Fault </b> <br>
+                    The statistics do not distinguish between secondary and latent faults.
+                </div>
+                <div class="type2-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> Primary or Secondary/Latent Fault </i>
+                </div>
+                <div class="type3-header"> <br>
+                    <b> Temporary or Permanent Fault </b> <br>
+                    See sections 5.2.4 and 5.2.5.
+                </div>
+                <div class="type3-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> Temporary or Permanent Fault </i>
+                </div>
+                <div class="type4-header"> <br>
+                    <b> Intermittent or Non-intermittent Fault </b> <br>
+                    See Section 4.2.6.
+                </div>
+                <div class="type4-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> Intermittent or Non-intermittent Fault </i>
+                </div>
+                <div class="cause-header"> <br>
+                    <b> Fault Cause </b> <br>
+                    The fault cause must always be reported. <br>
+                    If the fault cause is a combination of several fault causes, choose the most signifi-cant one.
+                </div>
+                <div class="cause-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> See Section 4.2.9 </i>
+                </div>
+                <div class="repair-header"> <br>
+                    <b> Repair time </b> <br>
+                    Not required but may be useful for internal use. <br>
+                    Voluntary waiting time should not be included
+                </div>
+                <div class="repair-input" id="input-box"> <br>
+                    <svg width=300 height=30>
+                        <rect x="15" y="2" rx="5" ry="5" width="250" height="25" style="fill:lightgrey; stroke-width: 2px; stroke:black"></rect>
+                    </svg>
+                    <br> <i> Must be given in hours and minutes. See Section 4.4.11. </i>
                 </div>
             </div>
+            <div class="inputbutton" id="button"> Done </div>
         </div>
     </body>
 </html>
