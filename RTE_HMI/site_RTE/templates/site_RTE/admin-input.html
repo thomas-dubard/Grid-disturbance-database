@@ -3,29 +3,40 @@
         <title>
             Grid disturbance database - Data Input Page
         </title>
-        <link rel="stylesheet" href="admin-input.css">
+        <link rel="stylesheet" href="\static\css\admin-input.css">
     </head>
     <body>
         <div class="container">
             <div class="header">
-                Data Input Page
+                <h1> Data Input Page </h1>
             </div>
-            <div class="description">
+            <div class="description"> <br>
                 This page is meant to upload new data into the database.<br>
-                Once you have finished, you can return to the <a class="link" href="admin-main.html" title="Admin Home page"> Admin Home Page </a>.
+                Once you have finished, you can return to the 
+                <a class="link" href="{% url "admin-main" %}" title="Admin Home page">
+                    Admin Home page
+                </a>
             </div>
             <div class="buttonpad">
                 <div class="to-grid-dist" id="button">
-                    <a class="link" href="grid-dist.html" title="Grid Disturbance Input page"> Grid Disturbance Input Page</a>
+                    <a class="link" href="{% url "grid-dist" %}" title="Grid Disturbance Input page">
+                        Grid Disturbance Input page
+                    </a>
                 </div>
                 <div class="to-fault" id="button">
-                    <a class="link" href="fault.html" title="Fault Input page"> Fault Input Page</a>
+                    <a class="link" href="{% url "fault" %}" title="Fault  Input page">
+                        Fault Input page
+                    </a>
                 </div>
                 <div class="to-outage" id="button">
-                    <a class="link" href="outage.html" title="Outage Input page"> Outage Input Page</a>
+                    <a class="link" href="{% url "outage" %}" title="Outage Input page">
+                        Outage Disturbance Input page
+                    </a>
                 </div>
                 <div class="to-interrupt" id="button">
-                    <a class="link" href="interrupt.html" title="Interruption Input page"> Interruption Input Page</a>
+                    <a class="link" href="{% url "interrupt" %}" title="Interrupt Input page">
+                        Interrupt Input page
+                    </a>
                 </div>
             </div>
         </div>
