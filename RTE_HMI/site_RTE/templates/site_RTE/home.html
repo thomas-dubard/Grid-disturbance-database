@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>
+            Grid disturbance database - Home Page
+        </title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                Home Page
+            </div>
+            <div class="buttonpad">
+                <div class="to-request" id="button">
+                    <a class="link" href="{% url "user-request" %}" title="User Request page">
+                        User Request Page
+                    </a>
+                </div>
+                <div class="to-admin" id="button">
+                    <a class="link" href="{% url "admin-co" %}" title="Administrator Connection Page">
+                        Admin Connection
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
