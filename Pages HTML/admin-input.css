@@ -1,5 +1,6 @@
 body {
     background-color: navy;
+    padding: 6px;
     color: white;
     text-align: center;
 }
@@ -30,14 +31,15 @@ body {
     height: auto;
     width: auto;
     justify-items: center;
+    padding-top: 10px;
 }
 
 #button {
     padding: 2px;
-    border: 1px solid blue;
-    border-radius: 3px;
+    border: 2px solid blue;
+    border-radius: 6px;
     background-color: gainsboro;
-    width: max-content;
+    width: 250px;
     height: max-content;
     color: black;
   }

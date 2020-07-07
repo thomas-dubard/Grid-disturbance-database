@@ -1,0 +1,111 @@
+Verify the connection :
+<class 'pymysql.connections.Connection'> 
+
+Try a wrong username / password :
+Incorrect username or password.
+False 
+
+Try a wrong name of database :
+Database fakemysql does not exist.
+False
+
+Try a wrong adress of database :
+Can't connect to MySQL server on 256.256.256.256.
+False 
+
+Add a new user with limited authority :
+'Alfonse.Elric'@'localhost' added successfully.
+Test the connection with the created account
+<class 'pymysql.connections.Connection'> 
+
+Initialize 4 tables with limited user :
+Error : (1142, "CREATE command denied to user 'Alfonse.Elric'@'localhost' for table 'disturbance'")
+Error : (1142, "CREATE command denied to user 'Alfonse.Elric'@'localhost' for table 'fault'")
+Error : (1142, "CREATE command denied to user 'Alfonse.Elric'@'localhost' for table 'outage'")
+Error : (1142, "CREATE command denied to user 'Alfonse.Elric'@'localhost' for table 'interruption'")
+
+
+Initialize 4 tables with root user :
+Table DISTURBANCE created successfully.
+Table FAULT created successfully.
+Table OUTAGE created successfully.
+Table INTERRUPTION created successfully.
+
+
+Insert a disturbance record :
+Disturbance ['2020-1', '2020-07-05', '11:11:23'] added.
+Check the table 'disturbance' :
+[('2020-1', datetime.date(2020, 7, 5), datetime.timedelta(seconds=40283))]
+Current number of records in disturbance :  1 
+
+Insert a wrong disturbance record :
+Error : (1292, "Incorrect time value: 'Disturbance' for column 'time' at row 1")
+Current number of records in disturbance :  1 
+
+Insert some fault records :
+Fault [1, '2020-1'] added successfully.
+Fault [2, '2020-1'] added successfully.
+[(1, '2020-1', 'Busbars', '400 kV', 'Own', 'Component', 'Direct earthed', 'Single-phase earth fault', 'Primary', 'Temporary', 'Non-intermittent', 'Lightning', datetime.timedelta(0)), (2, '2020-1', 'Circuit breakers', '400 kV', 'Own', 'Component', 'Direct earthed', 'Function failing to occur', 'Secondary/latent fault', 'Permanent', 'Non-intermittent', 'Technical equipment', datetime.timedelta(days=2))]
+Current number of records in fault :  2 
+
+Insert a wrong fault record :
+Error : (1265, "Data truncated for column 'ctype' at row 1")
+No such disturbance id 2019-1
+Current number of records in fault :  2 
+
+Insert some outage records :
+Outage ('Line X-Y', 1) added successfully.
+Outage ('Line Y-Z', 2) added successfully.
+Outage ('Busbar Y', 1) added successfully.
+Outage ('Power transformer Y', 2) added successfully.
+Check the table 'outage' :
+[('Line X-Y', 1, 'Cable', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after repair', datetime.timedelta(days=2)), ('Line Y-Z', 2, 'Cable', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700)), ('Busbar Y', 1, 'Bushbar', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700)), ('Power transformer Y', 2, 'Power transformer', '7 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700))]
+Current number of records in outage :  4 
+
+Insert some wrong outage records :
+Error : (1265, "Data truncated for column 'type' at row 1")
+998 is not a valid fault serial number.
+Current number of records in outage :  4 
+
+Insert an interruption record :
+Interruption ('Power transformer', '00:45:00') added successfully.
+[('Power transformer', '2020-1', datetime.timedelta(seconds=2700))]
+Current number of records in interruption :  1 
+
+Insert a wrong interruption record :
+No such disturbance '1970-1' found.
+Current number of records in interruption :  1 
+
+Select a disturbation with all its associating records :
+Disturbance :
+ [('2020-1', datetime.date(2020, 7, 5), datetime.timedelta(seconds=40283))]
+Fault :
+ [(1, '2020-1', 'Busbars', '400 kV', 'Own', 'Component', 'Direct earthed', 'Single-phase earth fault', 'Primary', 'Temporary', 'Non-intermittent', 'Lightning', datetime.timedelta(0)), (2, '2020-1', 'Circuit breakers', '400 kV', 'Own', 'Component', 'Direct earthed', 'Function failing to occur', 'Secondary/latent fault', 'Permanent', 'Non-intermittent', 'Technical equipment', datetime.timedelta(days=2))]
+Outage :
+ [('Line X-Y', 1, 'Cable', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after repair', datetime.timedelta(days=2)), ('Busbar Y', 1, 'Bushbar', '0 MWh', 
+datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700)), ('Line Y-Z', 2, 'Cable', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700)), ('Power transformer Y', 2, 'Power transformer', '7 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700))]
+Interruption :
+ [('Power transformer', '2020-1', datetime.timedelta(seconds=2700))]
+
+Fetch the table of outages :
+[('Line X-Y', 1, 'Cable', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after repair', datetime.timedelta(days=2)), ('Line Y-Z', 2, 'Cable', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700)), ('Busbar Y', 1, 'Bushbar', '0 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700)), ('Power transformer Y', 2, 'Power transformer', '7 MWh', datetime.timedelta(0), 'Automatically', 'Manually after inspection', datetime.timedelta(seconds=2700))]
+
+Delete all tables with limited account :
+Error : (1142, "DROP command denied to user 'Alfonse.Elric'@'localhost' for table 'disturbance'")
+Error : (1142, "DROP command denied to user 'Alfonse.Elric'@'localhost' for table 'fault'")
+Error : (1142, "DROP command denied to user 'Alfonse.Elric'@'localhost' for table 'outage'")
+Error : (1142, "DROP command denied to user 'Alfonse.Elric'@'localhost' for table 'interruption'")
+
+
+Delete all tables with root account :
+Table Disturbance deleted successfully.
+Table Fault deleted successfully.
+Table Outage deleted successfully.
+Table Interruption deleted successfully.
+
+
+Delete user with limited authority :
+'Alfonse.Elric'@'localhost' removed successfully.
+Test the connection with the removed account :
+Incorrect username or password.
+False

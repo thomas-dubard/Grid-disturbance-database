@@ -1,13 +1,13 @@
 body {
     background-color: navy;
+    padding: 6px;
     color: white;
     text-align: center;
 }
 
 .container {
     display:grid;
-    grid-template-rows: 
-    1fr 1fr 1fr;
+    grid-template-rows: auto;
     grid-template-columns: auto;
     grid-template-areas: 
     "header"
@@ -20,6 +20,7 @@ body {
 
 .buttonpad {
     display: grid;
+    padding-top: 30px;
     grid-template-columns: 
     1fr 1fr;
     grid-template-rows:
@@ -34,10 +35,10 @@ body {
 
 #button {
     padding: 2px;
-    border: 1px solid blue;
-    border-radius: 3px;
+    border: 2px solid blue;
+    border-radius: 6px;
     background-color: gainsboro;
-    width: max-content;
+    width: 250px;
     height: max-content;
     color: black;
   }

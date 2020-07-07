@@ -32,10 +32,10 @@ body {
 
 #button {
     padding: 2px;
-    border: 1px solid blue;
-    border-radius: 3px;
+    border: 2px solid blue;
+    border-radius: 6px;
     background-color: gainsboro;
-    width: max-content;
+    width: 150px;
     height: max-content;
     color: black;
   }

@@ -31,10 +31,14 @@ class DbGrid:
         except pymysql.err.OperationalError as e:
             if str(e)[1:5] == '1045':
                 print(f'Incorrect username or password.')
-            elif str(e)[1:5] == '1044':
-                print(f'Database {self.db} does not exist.')
             elif str(e)[1:5] == '2003':
                 print(f'Can\'t connect to MySQL server on {self.host}.')
+            else:
+                print(f"Error : {e}")
+            return False
+        except pymysql.err.InternalError as e:
+            if str(e)[1:5] == '1049':
+                print(f'Database {self.db} does not exist.')
             else:
                 print(f"Error : {e}")
             return False
@@ -126,7 +130,7 @@ class DbGrid:
             ref  CHAR(16)  NOT NULL,
             duration TIME NOT NULL);''')
             print("Table INTERRUPTION created successfully.")
-        except pymysql.err.InternalError as e:
+        except (pymysql.err.InternalError, pymysql.err.OperationalError) as e:
             print(f"Error : {e}")
 
         conn.commit()
@@ -193,7 +197,7 @@ class DbGrid:
             c.execute(f"INSERT INTO DISTURBANCE(id,date,time) \
                       VALUES {tuple(disturb)}")
             print(f"Disturbance {disturb} added.")
-        except pymysql.err.IntegrityError as e:
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
             print(f"Error : {e}")
         # Update
         conn.commit()
@@ -215,13 +219,26 @@ class DbGrid:
             return
         # Insertion
         c = conn.cursor()
+        # verification
+        try:
+            sql_command = f"SELECT * FROM DISTURBANCE \
+                            WHERE id = '{disturb}' LIMIT 1 ;"
+            c.execute(sql_command)
+            if len(c.fetchall()) == 0:
+                print(f'No such disturbance id {disturb}')
+                c.close()
+                return
+        except (pymysql.err.IntegrityError,
+                pymysql.err.InternalError, pymysql.err.DataError) as e:
+            print(f"Error : {e}")
         sql_command = (fault_nr, disturb) + fault[:]
         try:
             c.execute(f"INSERT INTO FAULT(serial, \
                 ref, ctype, voltage, ground, ownarea, cfsd, ftype,\
-                primar, temporary, itmt, cause, repair) VALUES {sql_command}")
+                primar, temporary, itmt, cause, repair) VALUES {sql_command};")
             print(f"Fault {[fault_nr, disturb]} added successfully.")
-        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+        except (pymysql.err.IntegrityError,
+                pymysql.err.InternalError, pymysql.err.DataError) as e:
             print(f"Error : {e}")
         # Update
         conn.commit()
@@ -251,7 +268,8 @@ class DbGrid:
                 interrup, discon, reclos, duration)\
                 VALUES {tuple(outage)}")
             print(f"Outage {outage[:2]} added successfully.")
-        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+        except (pymysql.err.IntegrityError,
+                pymysql.err.InternalError, pymysql.err.DataError) as e:
             print(f"Error : {e}")
         # Update
         conn.commit()
@@ -283,7 +301,8 @@ class DbGrid:
                 c.close()
                 conn.close()
                 return
-        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+        except (pymysql.err.IntegrityError,
+                pymysql.err.InternalError, pymysql.err.DataError) as e:
             print(f"Error : {e}")
             c.close()
             conn.close()
@@ -475,7 +494,8 @@ class DbGrid:
             c.execute(sql1)
             c.execute(sql2)
             print(f"'{user}'@'{host}' added successfully.")
-        except (pymysql.err.IntegrityError, pymysql.err.InternalError) as e:
+        except (pymysql.err.IntegrityError, pymysql.err.InternalError,
+                pymysql.err.OperationalError) as e:
             print(f"Error : {e}")
         c.close()
         conn.close()
